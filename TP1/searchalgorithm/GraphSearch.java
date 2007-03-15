@@ -7,7 +7,7 @@ import searchproblem.*;
 public class GraphSearch implements SearchAlgorithm {
 	
 	SearchProblem prob;
-	Queue<Node> fringe;
+	PriorityQueue<Node> fringe;
 	Set<State> closed;
 	List<Node> visited;
 	int expansions;
@@ -16,7 +16,7 @@ public class GraphSearch implements SearchAlgorithm {
 	long time, start;
 	
 
-	public GraphSearch(SearchProblem p, Queue<Node> q) {
+	public GraphSearch(SearchProblem p, PriorityQueue<Node> q) {
 			prob = p;
 			fringe = q;
 			visited = new LinkedList<Node>();
