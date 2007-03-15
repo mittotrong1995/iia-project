@@ -9,7 +9,7 @@ public class BreadthFirstSearch implements SearchAlgorithm {
 	private GraphSearch graph;
 	
 	public BreadthFirstSearch(SearchProblem p) {
-		Queue<Node> fifo = new PriorityQueue<Node>();
+		Queue<Node> fifo = new LinkedList<Node>();
 		graph = new GraphSearch(p,fifo);
 	}
 	
