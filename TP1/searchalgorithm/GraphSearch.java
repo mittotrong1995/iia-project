@@ -5,32 +5,33 @@ import searchproblem.*;
 
 public class GraphSearch implements SearchAlgorithm {
 	
-	SearchProblem prob;
+	SearchProblem p;
 	Queue<Node> fringe;
-	Set<State> closed;
+	//Set<State> closed;
 	List<Node> visited;
+	private HashSet<State> closed;
 	int expansions;
 	int generated;
-	int repstates;
+	int repeated;
 	long time, start;
 	
 
 	public GraphSearch(SearchProblem p, Queue<Node> q) {
-			prob = p;
+			this.p = p;
 			fringe = q;
 			visited = new LinkedList<Node>();
+			closed = new HashSet<State>();
 			expansions = 0;
 			generated = 0;
-			repstates = 0;
+			repeated = 0;
 			time = 0;
 			
 	}
-	
+	/*
 	public Node searchSolution() {
 		
 		start = System.nanoTime();
-		closed = new HashSet<State>();
-		fringe.add(new Node(prob.getInitial()));
+		fringe.add(new Node(p.getInitial()));
 		
 		while(true){
 			if (fringe.isEmpty())
@@ -40,7 +41,7 @@ public class GraphSearch implements SearchAlgorithm {
 				repstates++;
 			else visited.add(node);
 			
-			if(prob.goalTest(node.getState())){
+			if(p.goalTest(node.getState())){
 				time = System.nanoTime() - start;
 				return node;
 			}
@@ -54,6 +55,41 @@ public class GraphSearch implements SearchAlgorithm {
 			}
 		}
 		
+	}*/
+	
+	
+	public Node searchSolution() {
+	Node node = new Node(p.getInitial());
+	fringe.add(node);
+	long startingTime = System.nanoTime();
+	for (;;)
+	{
+		if (fringe.isEmpty())
+		{
+			time = System.nanoTime()-startingTime;
+			//System.out.println("imprimiu NULL");
+			return null;
+		}
+
+		node = fringe.remove();
+		if (p.goalTest(node.getState()))
+		{
+			time = System.nanoTime()-startingTime;
+		//	System.out.println("imprimiu no");
+			return node;
+		}
+		
+		
+		if (!closed.contains(node.getState()) )// || node.getPathCost()	< closed.get(node).getPathCost() )
+		{
+			List<Node> children = node.Expand();
+			closed.add(node.getState());
+			fringe.addAll(children);
+			expansions++;
+			repeated++;
+			generated += children.size();
+		}
+	 }
 	}
 
 	public Map<String,Number> getMetrics() {
@@ -61,7 +97,7 @@ public class GraphSearch implements SearchAlgorithm {
 		
 		metrics.put("Node Expansions",expansions);
 		metrics.put("Nodes Generated",generated);
-		metrics.put("State repetitions",repstates);		
+		metrics.put("State repetitions",repeated);		
 		metrics.put("Runtime (s)", time/1E9);
 		return metrics;
 	}
