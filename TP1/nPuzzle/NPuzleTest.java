@@ -15,9 +15,9 @@ public class NPuzleTest {
 		NPuzzleState goal = new NPuzzleState(f,3);
 				
 		NPuzzleProblem prob = new NPuzzleProblem(init,goal);
-		SearchAlgorithm u = new UniformCostSearch(prob);
+//		SearchAlgorithm u = new UniformCostSearch(prob);
 //		SearchAlgorithm u = new BreadthFirstSearch(prob);
-//		SearchAlgorithm u = new AStarSearch(prob);
+		SearchAlgorithm u = new AStarSearch(prob);
 		
 		Node n = u.searchSolution();
 		if( n != null)
