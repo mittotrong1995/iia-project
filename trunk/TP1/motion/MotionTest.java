@@ -32,7 +32,7 @@ public class MotionTest extends Component {
 	public static void main(String[] args) {		
 
 		System.gc();
-		BitmapTerrain t = new BitmapTerrain("C:/tp1/codigo/motion/th.png");
+		BitmapTerrain t = new BitmapTerrain("D:/Pedro/TP1/motion/th.png");
 		
 		
 		int startx = 141; int starty = 512;
