@@ -18,16 +18,22 @@ public class RoverState extends State {
 	}
 	
 	protected int currX, currY;
+	BitmapTerrain t;
+	
 		
-	public RoverState(int x, int y){
+	public RoverState(int x, int y, BitmapTerrain t){
 		currX = x;
 		currY = y;
+		this.t = t;
+		
 	}
 	
 	@Override
 	public Object clone() {
-		return new RoverState( currX, currY);
+		return new RoverState( currX, currY, t);
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -56,6 +62,65 @@ public class RoverState extends State {
 
 	@Override
 	public double applyOperator(Object op) {
+		
+		
+		switch ((RoverOperator)op) {
+		case N: 
+			return moveN();
+		case S:
+			return moveS();
+		case W:
+			return moveW();
+		case E:
+			return moveE();
+		case NE:
+			return moveNE();
+		case NW:
+			return moveNW();
+		case SE:
+			return moveSE();
+		case SW:
+			return moveSW();
+		}
+		return 0;
+	}
+
+	private double moveSW() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveSE() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveNW() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveNE() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveE() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveW() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveS() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private double moveN() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -79,19 +144,19 @@ public class RoverState extends State {
 		case N: 
 			return currY-1 < 0;
 		case S:
-			return currY+1 < 100;
+			return currY+1 < t.getVerticalSize();
 		case W:
 			return currX-1 > 0;
 		case E:
-			return currX+1 < 100;
+			return currX+1 < t.getHorizontalSize();
 		case NE:
-			return (currX+1 > 100 && currY-1 > 0);
+			return (currX+1 < t.getHorizontalSize() && currY-1 > 0);
 		case NW:
-			return (currX-1 > 0 && currY+1 < 100);
+			return (currX-1 > 0 && currY-1 > 0);
 		case SE:
-			return (currX+1 > 100 && currY-1 < 0);
+			return (currX+1 < t.getHorizontalSize() && currY+1 < t.getVerticalSize());
 		case SW:
-			return (currX-1 > 100 && currY+1 <100);
+			return (currX-1 > 0 && currY+1 < t.getVerticalSize());
 		}
 		return false;
 	}
@@ -101,6 +166,13 @@ public class RoverState extends State {
 		RoverState child = (RoverState) this.clone();
 		return new Arc(this,child,op,child.applyOperator(op));
 	}
+
+	public int getCoordY() {
+		return currY;
+	}
 	
+	public int getCoordX() {
+		return currX;
+	}
 
 }
