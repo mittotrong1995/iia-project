@@ -13,7 +13,7 @@ public class RoverProblem extends InformedSearchProblem {
 	}
 	
 	public double heuristic(Node n) {
-		return 0;
+		return 1;
 	}
 
 }
