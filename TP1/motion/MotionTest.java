@@ -45,7 +45,7 @@ public class MotionTest extends Component {
 		SearchAlgorithm u = new AStarSearch(prob);
 		
 		
-		//t = new BitmapTerrain("D:/Pedro/TP1/motion/th.png");
+		t = new BitmapTerrain("D:/Pedro/TP1/motion/th.png");
 		Node n = u.searchSolution();
 		System.out.println(u.getMetrics());
 		if( n != null) {
