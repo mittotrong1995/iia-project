@@ -7,26 +7,28 @@ import searchproblem.*;
 
 public class RoverProblem extends InformedSearchProblem {
 	
-	private RoverState goal;
+	private int endX, endY, endHeight;
 	
-	public RoverProblem(RoverState initial, RoverState goal) {
-		super(initial,goal);
-		this.goal = goal;
+	public RoverProblem(RoverState initial, int gx, int gy) {
+		super(initial,new RoverState(gx,gy,initial.t));
+		endX = gx;
+		endY = gy;
+		endHeight = initial.t.getHeight(endX, endY );
 	}
 	
 	public double heuristic(Node n) {
-		int currX,currY,endX,endY;
+		int currX,currY;
+		int currHeight,height;
 		RoverState state = (RoverState)n.getState();
 		currX = state.getCoordX();
 		currY = state.getCoordY();
-		endX = goal.getCoordX();
-		endY = goal.getCoordY();
-		if (state.t.getHeight(currX, currY) > goal.t.getHeight(endX, endY))		
-			return 0.99*sqrt(pow(endX-currX,2) + pow(endY-currY,2));
+		currHeight = state.t.getHeight(currX, currY);
 		
-		if (state.t.getHeight(currX, currY) < goal.t.getHeight(endX, endY))		
-			return 1.01*sqrt(pow(endX-currX,2) + pow(endY-currY,2));
+		height = endHeight - currHeight;
+		
+		if (height < 0)		
+			return pow(0.99,sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2)));
 		else
-			return sqrt(pow(endX-currX,2) + pow(endY-currY,2));
+			return sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2));
 	}
 }
