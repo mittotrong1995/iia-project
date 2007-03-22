@@ -21,8 +21,12 @@ public class RoverProblem extends InformedSearchProblem {
 		currY = state.getCoordY();
 		endX = goal.getCoordX();
 		endY = goal.getCoordY();
+		if (state.t.getHeight(currX, currY) > goal.t.getHeight(endX, endY))		
+			return 0.99*sqrt(pow(endX-currX,2) + pow(endY-currY,2));
 		
-		return sqrt(pow(endX-currX,2) + pow(endY-currY,2));			
+		if (state.t.getHeight(currX, currY) < goal.t.getHeight(endX, endY))		
+			return 1.01*sqrt(pow(endX-currX,2) + pow(endY-currY,2));
+		else
+			return sqrt(pow(endX-currX,2) + pow(endY-currY,2));
 	}
-
 }
