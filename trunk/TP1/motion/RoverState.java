@@ -1,11 +1,11 @@
 package motion;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import nPuzzle.NPuzzleState;
-import nPuzzle.NPuzzleState.NPuzzleOperator;
+import motion.Terrain.TerrainType;
+
+
 import static java.lang.Math.*;
 
 import searchproblem.*;
@@ -25,16 +25,14 @@ public class RoverState extends State {
 		currX = x;
 		currY = y;
 		this.t = t;
-		
 	}
 	
 	@Override
 	public Object clone() {
 		return new RoverState( currX, currY, t);
 	}
-
-
-
+	
+	
 	@Override
 	public int hashCode() {
 		final int PRIME = 31;
@@ -84,45 +82,60 @@ public class RoverState extends State {
 		}
 		return 0;
 	}
-
+	// Nestas funcoes falta multiplicar pelo valor da distancia euclidiana
+	// Ainda nao programada
 	private double moveSW() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX-1,currY+1);
 	}
 
 	private double moveSE() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX+1,currY+1);
 	}
 
 	private double moveNW() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX-1,currY-1);
 	}
 
 	private double moveNE() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX+1,currY-1);
 	}
 
 	private double moveE() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX+1,currY);
 	}
 
 	private double moveW() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX-1,currY);
 	}
 
 	private double moveS() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX,currY+1);
 	}
 
 	private double moveN() {
-		// TODO Auto-generated method stub
-		return 0;
+		return moveCost(currX,currY-1);
+	}
+	
+	public double moveCost(int x, int y){
+		int factor;
+		double height;
+		
+		if (t.getTerrainType(x, y).equals(TerrainType.SAND))
+			factor = 2;
+		else
+			if (t.getTerrainType(x, y).equals(TerrainType.ROCK))
+				factor = 3;
+			else
+				factor = 1;
+		
+		if (t.getHeight(x, y) > t.getHeight(currX, currY))
+			height = 1.01;
+		else if (t.getHeight(x, y) < t.getHeight(currX, currY))
+				height = 0.99;
+			 else
+				height = 1.0; 
+		
+		return (height*factor);
 	}
 
 	@Override

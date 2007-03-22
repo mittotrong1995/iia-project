@@ -7,7 +7,7 @@ import static java.lang.Math.*;
 
 public class NPuzzleProblem extends InformedSearchProblem {
 	private HashMap<Object,Integer> coordX = new HashMap<Object,Integer>();
-	private HashMap<Object,Integer> coordY = new HashMap<Object,Integer>();;
+	private HashMap<Object,Integer> coordY = new HashMap<Object,Integer>();
 	
 	public NPuzzleProblem(NPuzzleState initial, NPuzzleState goal) {
 		super(initial,goal); 

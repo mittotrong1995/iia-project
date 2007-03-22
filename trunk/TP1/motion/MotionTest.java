@@ -36,14 +36,16 @@ public class MotionTest extends Component {
 		
 		
 		int startx = 141; int starty = 512;
+		//int gx=140; int gy=512;
 		int gx=180; int gy=540;
 		//int gx=400; int gy=512; 
 		RoverState init = new RoverState(startx,starty,t);
-		InformedSearchProblem prob = new RoverProblem(init,gx,gy);
+		RoverState goal = new RoverState(gx,gy,t);
+		InformedSearchProblem prob = new RoverProblem(init,goal);
 		SearchAlgorithm u = new AStarSearch(prob);
 		
 		
-		t = new BitmapTerrain("C:/tp1/codigo/motion/th.png");
+		//t = new BitmapTerrain("D:/Pedro/TP1/motion/th.png");
 		Node n = u.searchSolution();
 		System.out.println(u.getMetrics());
 		if( n != null) {
