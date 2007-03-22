@@ -8,9 +8,9 @@ public class VacuumTest {
 		VacuumState init = new VacuumState(world,1,5);
 				
 		VacuumProblem prob = new VacuumProblem(init);
-		SearchAlgorithm bfs = new BreadthFirstSearch(prob);
+		//SearchAlgorithm bfs = new BreadthFirstSearch(prob);
 		//SearchAlgorithm bfs = new UniformCostSearch(prob);
-		//SearchAlgorithm bfs = new DepthFirstSearch(prob);
+		SearchAlgorithm bfs = new DepthFirstSearch(prob);
 		System.out.println(bfs.searchSolution().getPath());	
 		System.out.println(bfs.getMetrics());
 	}
