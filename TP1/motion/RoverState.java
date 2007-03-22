@@ -87,60 +87,61 @@ public class RoverState extends State {
 	// Nestas funcoes falta multiplicar pelo valor da distancia euclidiana
 	// Ainda nao programada
 	private double moveSW() {
-		res = moveCost(currX-1,currY+1,true);
+		res = moveCost(currX-1,currY+1);
 		currX--;
 		currY++;
 		return res;
 	}
 
 	private double moveSE() {
-		res = moveCost(currX+1,currY+1,true);
+		res = moveCost(currX+1,currY+1);
 		currX++;
 		currY++;
 		return res;
 	}
 
 	private double moveNW() {
-		res = moveCost(currX-1,currY-1,true);
+		res = moveCost(currX-1,currY-1);
 		currX--;
 		currY--;
 		return res;
 	}
 
 	private double moveNE() {
-		res = moveCost(currX+1,currY-1,true);
+		res = moveCost(currX+1,currY-1);
 		currX++;
 		currY--;
 		return res;
 	}
 
 	private double moveE() {
-		res = moveCost(currX+1,currY,false);
+		res = moveCost(currX+1,currY);
 		currX++;
 		return res;
 	}
 
 	private double moveW() {
-		res = moveCost(currX-1,currY,false);
+		res = moveCost(currX-1,currY);
 		currX++;
 		return res;
 	}
 
 	private double moveS() {
-		res = moveCost(currX,currY+1,false);
+		res = moveCost(currX,currY+1);
 		currY++;
 		return res;
 	}
 
 	private double moveN() {
-		res = moveCost(currX,currY-1, false);
+		res = moveCost(currX,currY-1);
 		currY--;
 		return res;
 	}
 	
-	public double moveCost(int x, int y, boolean b){
+	public double moveCost(int x, int y){
 		int factor;
 		double height;
+		double euclides;
 		
 		if (t.getTerrainType(x, y).equals(TerrainType.SAND))
 			factor = 2;
@@ -149,18 +150,17 @@ public class RoverState extends State {
 				factor = 3;
 			else
 				factor = 1;
+		height = t.getHeight(x, y) - t.getHeight(currX, currY);
+		euclides = sqrt(pow(x-currX,2) + pow(y-currY,2) + pow(height,2));
 		
-		if (t.getHeight(x, y) > t.getHeight(currX, currY))
-			height = 1.01;
-		else if (t.getHeight(x, y) < t.getHeight(currX, currY))
-				height = 0.99;
+		if (height > 0)
+			height = pow(1.01,height);
+		else if (height < 0)
+				height = pow(0.99,height);
 			 else
 				height = 1.0; 
 		
-		if(b == false)
-			return (height*factor);
-		else
-			return (height*factor* sqrt(2));
+		return factor*height*euclides;
 	}
 
 	@Override

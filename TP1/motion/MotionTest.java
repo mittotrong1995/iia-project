@@ -40,8 +40,7 @@ public class MotionTest extends Component {
 		//int gx=180; int gy=540;
 		int gx=400; int gy=512; 
 		RoverState init = new RoverState(startx,starty,t);
-		RoverState goal = new RoverState(gx,gy,t);
-		InformedSearchProblem prob = new RoverProblem(init,goal);
+		InformedSearchProblem prob = new RoverProblem(init,gx,gy);
 		SearchAlgorithm u = new AStarSearch(prob);
 		
 		
