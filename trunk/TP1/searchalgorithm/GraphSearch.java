@@ -7,9 +7,8 @@ public class GraphSearch implements SearchAlgorithm {
 	
 	SearchProblem p;
 	Queue<Node> fringe;
-	//Set<State> closed;
-	List<Node> visited;
-	private HashSet<State> closed;
+	HashSet<Node> visited;
+	HashMap<Node,Node> closed;
 	int expansions;
 	int generated;
 	int repeated;
@@ -19,15 +18,15 @@ public class GraphSearch implements SearchAlgorithm {
 	public GraphSearch(SearchProblem p, Queue<Node> q) {
 			this.p = p;
 			fringe = q;
-			visited = new LinkedList<Node>();
-			closed = new HashSet<State>();
+			visited = new HashSet<Node>();
+			closed = new HashMap<Node,Node>();
 			expansions = 0;
 			generated = 0;
 			repeated = 0;
 			time = 0;
 			
 	}
-	/*
+	
 	public Node searchSolution() {
 		
 		start = System.nanoTime();
@@ -37,8 +36,9 @@ public class GraphSearch implements SearchAlgorithm {
 			if (fringe.isEmpty())
 				return null; 
 			Node node = fringe.remove();
+			
 			if(visited.contains(node))
-				repstates++;
+				repeated++;
 			else visited.add(node);
 			
 			if(p.goalTest(node.getState())){
@@ -46,50 +46,30 @@ public class GraphSearch implements SearchAlgorithm {
 				return node;
 			}
 			
-			if(!closed.contains(node.getState())){
+			if(!closed.containsKey(node)){
 				int size = fringe.size();
-				closed.add(node.getState());
+				closed.put(node,node);
 				fringe.addAll(node.Expand());
 				expansions++;
 				generated = generated + (fringe.size() - size);
 			}
+			else 
+			{
+				if (closed.get(node).getPathCost() > node.getPathCost()){
+					int size = fringe.size();
+					closed.remove(node);
+					closed.put(node, node);
+					repeated++;
+					fringe.addAll(node.Expand());
+					expansions++;
+					generated = generated + (fringe.size() - size);
+					
+				}
+			}
 		}
 		
-	}*/
-	
-	
-	public Node searchSolution() {
-	Node node = new Node(p.getInitial());
-	fringe.add(node);
-	long startingTime = System.nanoTime();
-	for (;;)
-	{
-		if (fringe.isEmpty())
-		{
-			time = System.nanoTime()-startingTime;
-			return null;
-		}
-
-		node = fringe.remove();
-		if (p.goalTest(node.getState()))
-		{
-			time = System.nanoTime()-startingTime;
-			return node;
-		}
-		
-		
-		if (!closed.contains(node.getState()) )
-		{
-			List<Node> children = node.Expand();
-			closed.add(node.getState());
-			fringe.addAll(children);
-			expansions++;
-			repeated++;
-			generated += children.size();
-		}
-	 }
 	}
-
+	
 	public Map<String,Number> getMetrics() {
 		Map<String,Number> metrics = new LinkedHashMap<String,Number>();
 		

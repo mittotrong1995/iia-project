@@ -31,4 +31,5 @@ public class RoverProblem extends InformedSearchProblem {
 		else
 			return sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2));
 	}
+		
 }

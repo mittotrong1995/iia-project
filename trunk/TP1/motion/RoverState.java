@@ -84,8 +84,7 @@ public class RoverState extends State {
 		}
 		return 0;
 	}
-	// Nestas funcoes falta multiplicar pelo valor da distancia euclidiana
-	// Ainda nao programada
+	
 	private double moveSW() {
 		res = moveCost(currX-1,currY+1);
 		currX--;
@@ -139,7 +138,7 @@ public class RoverState extends State {
 	}
 	
 	public double moveCost(int x, int y){
-		int factor;
+		double factor;
 		double height;
 		double euclides;
 		
@@ -152,12 +151,13 @@ public class RoverState extends State {
 				factor = 1;
 		
 		height = t.getHeight(x, y) - t.getHeight(currX, currY);
+		
 		euclides = sqrt(pow(x-currX,2) + pow(y-currY,2) + pow(height,2));
 		
 		if (height > 0)
 			height = pow(1.01,height);
 		else if (height < 0)
-				height = pow(0.99,height);
+				height = pow(0.99,abs(height));
 			 else
 				height = 1.0; 
 		
