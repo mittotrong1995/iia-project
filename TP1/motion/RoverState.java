@@ -87,58 +87,58 @@ public class RoverState extends State {
 	// Nestas funcoes falta multiplicar pelo valor da distancia euclidiana
 	// Ainda nao programada
 	private double moveSW() {
-		res = moveCost(currX-1,currY+1);
+		res = moveCost(currX-1,currY+1,true);
 		currX--;
 		currY++;
 		return res;
 	}
 
 	private double moveSE() {
-		res = moveCost(currX+1,currY+1);
+		res = moveCost(currX+1,currY+1,true);
 		currX++;
 		currY++;
 		return res;
 	}
 
 	private double moveNW() {
-		res = moveCost(currX-1,currY-1);
+		res = moveCost(currX-1,currY-1,true);
 		currX--;
 		currY--;
 		return res;
 	}
 
 	private double moveNE() {
-		res = moveCost(currX+1,currY-1);
+		res = moveCost(currX+1,currY-1,true);
 		currX++;
 		currY--;
 		return res;
 	}
 
 	private double moveE() {
-		res = moveCost(currX+1,currY);
+		res = moveCost(currX+1,currY,false);
 		currX++;
 		return res;
 	}
 
 	private double moveW() {
-		res = moveCost(currX-1,currY);
+		res = moveCost(currX-1,currY,false);
 		currX++;
 		return res;
 	}
 
 	private double moveS() {
-		res = moveCost(currX,currY+1);
+		res = moveCost(currX,currY+1,false);
 		currY++;
 		return res;
 	}
 
 	private double moveN() {
-		res = moveCost(currX,currY-1);
+		res = moveCost(currX,currY-1, false);
 		currY--;
 		return res;
 	}
 	
-	public double moveCost(int x, int y){
+	public double moveCost(int x, int y, boolean b){
 		int factor;
 		double height;
 		
@@ -157,7 +157,10 @@ public class RoverState extends State {
 			 else
 				height = 1.0; 
 		
-		return (height*factor);
+		if(b == false)
+			return (height*factor);
+		else
+			return (height*factor* sqrt(2));
 	}
 
 	@Override
