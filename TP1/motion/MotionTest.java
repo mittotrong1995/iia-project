@@ -36,7 +36,7 @@ public class MotionTest extends Component {
 		
 		
 		int startx = 141; int starty = 512;
-		//int gx=140; int gy=512;
+		
 		//int gx=180; int gy=540;
 		int gx=400; int gy=512; 
 		RoverState init = new RoverState(startx,starty,t);
