@@ -150,6 +150,7 @@ public class RoverState extends State {
 				factor = 3;
 			else
 				factor = 1;
+		
 		height = t.getHeight(x, y) - t.getHeight(currX, currY);
 		euclides = sqrt(pow(x-currX,2) + pow(y-currY,2) + pow(height,2));
 		
