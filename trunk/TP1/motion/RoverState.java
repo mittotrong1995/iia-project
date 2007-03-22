@@ -18,13 +18,15 @@ public class RoverState extends State {
 	}
 	
 	protected int currX, currY;
-	BitmapTerrain t;
+	protected BitmapTerrain t;
+	protected double res;
 	
 		
 	public RoverState(int x, int y, BitmapTerrain t){
 		currX = x;
 		currY = y;
 		this.t = t;
+		res = 0;
 	}
 	
 	@Override
@@ -85,35 +87,55 @@ public class RoverState extends State {
 	// Nestas funcoes falta multiplicar pelo valor da distancia euclidiana
 	// Ainda nao programada
 	private double moveSW() {
-		return moveCost(currX-1,currY+1);
+		res = moveCost(currX-1,currY+1);
+		currX--;
+		currY++;
+		return res;
 	}
 
 	private double moveSE() {
-		return moveCost(currX+1,currY+1);
+		res = moveCost(currX+1,currY+1);
+		currX++;
+		currY++;
+		return res;
 	}
 
 	private double moveNW() {
-		return moveCost(currX-1,currY-1);
+		res = moveCost(currX-1,currY-1);
+		currX--;
+		currY--;
+		return res;
 	}
 
 	private double moveNE() {
-		return moveCost(currX+1,currY-1);
+		res = moveCost(currX+1,currY-1);
+		currX++;
+		currY--;
+		return res;
 	}
 
 	private double moveE() {
-		return moveCost(currX+1,currY);
+		res = moveCost(currX+1,currY);
+		currX++;
+		return res;
 	}
 
 	private double moveW() {
-		return moveCost(currX-1,currY);
+		res = moveCost(currX-1,currY);
+		currX++;
+		return res;
 	}
 
 	private double moveS() {
-		return moveCost(currX,currY+1);
+		res = moveCost(currX,currY+1);
+		currY++;
+		return res;
 	}
 
 	private double moveN() {
-		return moveCost(currX,currY-1);
+		res = moveCost(currX,currY-1);
+		currY--;
+		return res;
 	}
 	
 	public double moveCost(int x, int y){
