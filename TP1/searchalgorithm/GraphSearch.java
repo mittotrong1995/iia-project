@@ -67,7 +67,6 @@ public class GraphSearch implements SearchAlgorithm {
 		if (fringe.isEmpty())
 		{
 			time = System.nanoTime()-startingTime;
-			//System.out.println("imprimiu NULL");
 			return null;
 		}
 
@@ -75,12 +74,11 @@ public class GraphSearch implements SearchAlgorithm {
 		if (p.goalTest(node.getState()))
 		{
 			time = System.nanoTime()-startingTime;
-		//	System.out.println("imprimiu no");
 			return node;
 		}
 		
 		
-		if (!closed.contains(node.getState()) )// || node.getPathCost()	< closed.get(node).getPathCost() )
+		if (!closed.contains(node.getState()) )
 		{
 			List<Node> children = node.Expand();
 			closed.add(node.getState());
