@@ -27,8 +27,13 @@ public class RoverProblem extends InformedSearchProblem {
 		height = endHeight - currHeight;
 		
 		if (height < 0)		
-			return pow(0.99,sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2)));
+			return sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2))*
+			(pow(0.99,abs(height)));
 		else
+			if (height > 0)		
+				return sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2))*
+				(pow(1.01,abs(height)));
+			else
 			return sqrt(pow(endX-currX,2) + pow(endY-currY,2) + pow(height,2));
 	}
 		
