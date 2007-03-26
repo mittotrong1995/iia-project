@@ -121,7 +121,7 @@ public class RoverState extends State {
 
 	private double moveW() {
 		res = moveCost(currX-1,currY);
-		currX++;
+		currX--;
 		return res;
 	}
 
@@ -166,7 +166,7 @@ public class RoverState extends State {
 
 	@Override
 	public List<Arc> successorFunction() {
-		List<Arc> children = new ArrayList<Arc>(4);
+		List<Arc> children = new ArrayList<Arc>(8);
 		for(RoverOperator action : RoverOperator.values() ) {
 			if( applicableOperator(action))
 				children.add(successorState(action));

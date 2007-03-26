@@ -7,7 +7,6 @@ public class GraphSearch implements SearchAlgorithm {
 	
 	SearchProblem p;
 	Queue<Node> fringe;
-	HashSet<Node> visited;
 	HashMap<Node,Node> closed;
 	int expansions;
 	int generated;
@@ -18,7 +17,6 @@ public class GraphSearch implements SearchAlgorithm {
 	public GraphSearch(SearchProblem p, Queue<Node> q) {
 			this.p = p;
 			fringe = q;
-			visited = new HashSet<Node>();
 			closed = new HashMap<Node,Node>();
 			expansions = 0;
 			generated = 0;
@@ -37,9 +35,6 @@ public class GraphSearch implements SearchAlgorithm {
 				return null; 
 			Node node = fringe.remove();
 			
-			if(visited.contains(node))
-				repeated++;
-			else visited.add(node);
 			
 			if(p.goalTest(node.getState())){
 				time = System.nanoTime() - start;
