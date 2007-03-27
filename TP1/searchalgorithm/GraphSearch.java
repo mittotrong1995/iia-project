@@ -55,10 +55,6 @@ public class GraphSearch implements SearchAlgorithm {
 					closed.remove(node);
 					closed.put(node, node);
 					repeated++;
-					fringe.addAll(node.Expand());
-					expansions++;
-					generated = generated + (fringe.size() - size);
-					
 				}
 			}
 		}
