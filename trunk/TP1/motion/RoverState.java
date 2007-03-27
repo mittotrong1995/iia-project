@@ -155,11 +155,11 @@ public class RoverState extends State {
 		euclides = sqrt(pow(x-currX,2) + pow(y-currY,2) + pow(height,2));
 		
 		if (height > 0)
-			height = pow(1.01,height);
+			height = pow(1.01,abs(height));
 		else if (height < 0)
 				height = pow(0.99,abs(height));
 			 else
-				height = 1.0; 
+				height = 1; 
 		
 		return factor*height*euclides;
 	}
