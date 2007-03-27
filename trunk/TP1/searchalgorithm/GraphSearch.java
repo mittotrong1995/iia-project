@@ -51,7 +51,6 @@ public class GraphSearch implements SearchAlgorithm {
 			else 
 			{
 				if (closed.get(node).getPathCost() > node.getPathCost()){
-					int size = fringe.size();
 					closed.remove(node);
 					closed.put(node, node);
 					repeated++;
