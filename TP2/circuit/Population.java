@@ -7,15 +7,42 @@ import java.util.Collections;
  * 	Classe usada para a representação de uma população.
  */
 public class Population {
+	private boolean currupt;
+	private int size;
+	private ArrayList<Individual> pop;
+	private ArrayList<Double> acum;
+	private static Random gen = new Random();
+	private Individual bestInd;
+	private Individual worstInd;
+	private double bestFit;
+	private double worstFit;
+	private double sumOfFitness;
 	
 	/**
 	 * 	Construtor relativo à classe Population
 	 */
+	Population(){
+		this.currupt = true;
+		this.size = 0;
+		this.pop = new ArrayList<Individual>(100);
+		this.acum = new ArrayList<Double>(100);
+		this.sumOfFitness=0.0;
+		this.bestInd = null;
+		this.worstInd = null;
+		this.bestFit = Double.POSITIVE_INFINITY;
+		this.worstFit = Double.NEGATIVE_INFINITY;
+	}
+	
 	
 	/**
 	 * 	Construtor onde se especifica a popolação
 	 * @param p um array de indivíduos
 	 */
+	
+	Population(Individual[] indy){
+		for(int i =0; i< indy.length; i++)
+			this.pop.add(indy[i]);
+	}
 	
 	/**
 	 * Selecciona e devolve um indivíduo da população, tendo em conta a sua fitness
@@ -61,5 +88,45 @@ public class Population {
 		}
 	}
 	
+	public Population getElite(){
+		Population p= new Population();
+		p.addIndividual(this.getBestIndividual());
+		return p;
+	}
 
+
+	public ArrayList<Double> getAcum() {
+		return acum;
+	}
+
+
+	public double getBestFit() {
+		return bestFit;
+	}
+
+
+	public Individual getBestIndividual() {
+		return bestInd;
+	}
+
+
+	public double getSumOfFitness() {
+		return sumOfFitness;
+	}
+
+
+	public double getWorstFit() {
+		return worstFit;
+	}
+
+
+	public Individual getWorstIndividual() {
+		return worstInd;
+	}
+
+
+	public int size() {
+		return size;
+	}
+	
 }
