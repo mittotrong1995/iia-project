@@ -20,6 +20,7 @@ public abstract class Individual {
 	 */
 	public abstract void mutate();
 	
+	@Override
 	public abstract Object clone();
 	
 }

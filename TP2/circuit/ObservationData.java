@@ -1,7 +1,6 @@
 package circuit;
 
-import java.util.*;
-import java.lang.*;
+import java.util.*; 
 /**
  * 	Classe que caracteriza o "mapa" dos pontos a visitar pelo robot.
  */
@@ -81,6 +80,7 @@ public class ObservationData {
 		 * 	Método que retorna os limites do tempo segundo um certo formato
 		 * @return uma string
 		 */
+		@Override
 		public String toString() {
 			return "["+mintime+";"+maxtime+"]";
 		}
@@ -204,6 +204,7 @@ public class ObservationData {
 		* método que devolve uma string com o nome, as coordenadas e a duração da visita a um spot
 		* @return out, uma string
 		 */
+		@Override
 		public String toString() {
 			String out = name+" "+x+" "+y+" "+duration;
 			for(ObservationInterval i: obstimes)
@@ -267,6 +268,7 @@ public class ObservationData {
 		return costs[i][j];
 	}
 
+	@Override
 	public String toString() {
 		String out = size + "\n";
 		for(int i=0; i < size; i++)
