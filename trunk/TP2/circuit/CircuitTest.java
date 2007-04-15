@@ -10,7 +10,7 @@ public class CircuitTest {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 				
 		String data = "";
-		BufferedReader r = new BufferedReader( new FileReader("C:\\Documents and Settings\\Santanidis\\My Documents\\FCT\\10º Semestre\\IIA\\Trabalhos\\t2\\CincoLinha.txt"));
+		BufferedReader r = new BufferedReader( new FileReader("D:\\FCT\\IIA\\tp2\\CincoLinha.txt"));
 		
 		String line = r.readLine();
 		while( line != null) {

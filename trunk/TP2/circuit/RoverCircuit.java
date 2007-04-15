@@ -95,8 +95,8 @@ public class RoverCircuit extends Individual {
 			}
 		}
 		
-		children[0] = new RoverCircuit(data,(Integer [])child1.toArray());
-		children[1] = new RoverCircuit(data,(Integer [])child2.toArray());
+		children[0] = new RoverCircuit(data,(Integer[]) child1.toArray());
+		children[1] = new RoverCircuit(data,(Integer[])child2.toArray());
 		
 		return children;
 	}
@@ -108,7 +108,7 @@ public class RoverCircuit extends Individual {
 		
 		int fitaux = data.getSpot(circuit[0]).firstTime();
 		
-		for(int i=0; i<size; i++){
+		for(int i=0; i<size-1; i++){
 			if (i>0)
 				fitaux += data.getSpot(circuit[i]).durationObservation(fitaux)+ data.getCost(circuit[i], circuit[i+1]);
 			else
