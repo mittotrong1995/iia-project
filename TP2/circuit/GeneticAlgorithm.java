@@ -38,6 +38,7 @@ public class GeneticAlgorithm {
 		Random rand = new Random();
 		double bestFit = pop.getBestFit();
 		int counter = 0;
+		System.out.println(pop.size());
 		
 		while (counter < 30000){
 		
@@ -47,7 +48,7 @@ public class GeneticAlgorithm {
 				Individual mother = pop.selectIndividual();
 				Individual [] child;
 				
-				if (rand.nextFloat() > pcrossover)
+				if (rand.nextFloat() <= pcrossover)
 					child = father.crossover(mother);
 				else{
 					child = new Individual[2];
@@ -56,7 +57,7 @@ public class GeneticAlgorithm {
 				}
 				
 				for(int i=0; i< child.length;i++){
-					if(rand.nextFloat() < pmutate){
+					if(rand.nextFloat() <= pmutate){
 						child[i].mutate();
 					}
 					newpop.addIndividual(child[i]);
