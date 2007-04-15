@@ -121,8 +121,14 @@ public class RoverCircuit extends Individual {
 
 	@Override
 	public void mutate() {
-		// TODO Auto-generated method stub
+		int i1 = gen.nextInt(size-1);
+		int i2 = gen.nextInt(size-1);
+		int aux;
 		
+			aux = circuit[i1];
+			circuit[i1] = circuit[i2];
+			circuit[i2] = aux;
+			fitness = null;
 	}
 	
 }
