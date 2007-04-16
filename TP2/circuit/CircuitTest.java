@@ -9,37 +9,10 @@ public class CircuitTest {
 	 * @param args
 	 */
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		/*
-		String toObservation = "";
-		BufferedReader in = new BufferedReader( new FileReader("C:\\Documents and Settings\\Santanidis\\My Documents\\FCT\\10º Semestre\\IIA\\Trabalhos\\t2\\CinquentaAnel.txt"));
-		
-		String line = in.readLine();
-		while( line != null) {
-			toObservation += line + "\n";
-			line = in.readLine();
-		}   
-		
-		
-		ObservationData r = new ObservationData(toObservation);
-		
-		Population p = new Population();
-		
-		for(int i=0; i < 200; i++) {
-			Individual ind = new RoverCircuit(r);
-			p.addIndividual(ind);
-		}	
-		System.out.println(p.getBestIndividual());
-		System.out.println("Fit: "+ p.getBestIndividual().fitness());
-		
-		GeneticAlgorithm algorithm = new GeneticAlgorithm(p,0.9F,0.001F);
-		
-		Individual indy = algorithm.search();
-		System.out.println("Best individual found: "+ indy);
-		System.out.println("Fit: "+ indy.fitness());
-		*/
 		
 		String datastr = "";
-		BufferedReader reader = new BufferedReader( new FileReader("C:\\Documents and Settings\\Santanidis\\My Documents\\FCT\\10º Semestre\\IIA\\Trabalhos\\t2\\CinquentaAnel.txt"));
+		//BufferedReader reader = new BufferedReader( new FileReader("D:\\FCT\\IIA\\tp2\\CincoLinha.txt"));
+		BufferedReader reader = new BufferedReader( new FileReader("D:\\FCT\\IIA\\tp2\\50Anel.txt"));
 		
 		String line = reader.readLine();
 		while( line != null) {
@@ -109,7 +82,8 @@ public class CircuitTest {
 		System.out.println(p.selectIndividual());
 		System.out.println(p.selectIndividual());
 		
-		GeneticAlgorithm ga = new GeneticAlgorithm(p,0.9F,0.005F);
+		//GeneticAlgorithm ga = new GeneticAlgorithm(p,0.9F,0.01F);
+		GeneticAlgorithm ga = new GeneticAlgorithm(p,0.6F,0.001F);
 		
 		System.out.println("--------------------");
 		Individual indy = ga.search();

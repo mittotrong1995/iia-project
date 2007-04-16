@@ -89,9 +89,9 @@ public class Population {
 	}
 	
 	public Population getElite(int n){
-		Population z = new Population();
-		z.addIndividual(this.bestInd);
-		return z;
+		Population p = new Population();
+		p.addIndividual(this.bestInd);
+		return p;
 	}
 
 
