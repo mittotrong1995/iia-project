@@ -38,7 +38,6 @@ public class GeneticAlgorithm {
 		Random rand = new Random();
 		double bestFit = pop.getBestFit();
 		int counter = 0;
-		System.out.println(pop.size());
 		
 		while (counter < 30000){
 		

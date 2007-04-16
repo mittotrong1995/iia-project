@@ -1,8 +1,6 @@
 package circuit;
 
 import java.util.*;
-
-
 /**
  * 	Classe que instancia a classe abstracta Individual
  */
@@ -54,6 +52,26 @@ public class RoverCircuit extends Individual {
 		return false;
 	}
 
+	
+	@Override
+	public double fitness() {
+
+		if( fitness != null )
+			return fitness;
+		
+		int time = data.getSpot(circuit[0]).firstTime();
+		int previous = circuit[0];
+		for(int i=0; i < size; i++ ) {
+			time += data.getSpot(circuit[i]).durationObservation(time) + data.getCost(previous,circuit[i]);
+			previous = circuit[i];
+		}
+		time += data.getCost(previous, circuit[0]);
+		
+		fitness = (double) time;
+		System.out.println(fitness);
+		return fitness;
+	}
+	
 	@Override
 	public Individual[] crossover(Individual other) {
 		int r1 = gen.nextInt(size-1);
@@ -62,11 +80,11 @@ public class RoverCircuit extends Individual {
 		
 		
 		if( r2 >= r1 ){
-			cut1 = r1;
-			cut2 = r2;
+			cut1 = r1+1;
+			cut2 = r2+1;
 		} else {
-			cut1 = r2;
-			cut2 = r1;
+			cut1 = r2+1;
+			cut2 = r1+1;
 		}
 
 		int[] child1 = new int[size];
@@ -75,7 +93,7 @@ public class RoverCircuit extends Individual {
 		int[] father = this.circuit;
 		int[] mother = ((RoverCircuit) other).circuit;
 		
-		for(int i=cut1; i<cut2;i++) {
+		for(int i=cut1; i < cut2;i++) {
 			child1[i] = father[i]; 
 			child2[i] = mother[i];		
 		}
@@ -106,23 +124,7 @@ public class RoverCircuit extends Individual {
 		return children;
 	}
 
-	@Override
-	public double fitness() {
-		if (fitness != null)
-			return fitness;
-		
-		int fitaux = data.getSpot(circuit[0]).firstTime();
-		
-		for(int i=0; i<size-1; i++){
-			if (i>0)
-				fitaux += data.getSpot(circuit[i]).durationObservation(fitaux)+ data.getCost(circuit[i], circuit[i+1]);
-			else
-				fitaux += data.getSpot(circuit[i]).durationObservation(fitaux);
-		}
-		fitaux+= data.getCost(circuit[size-1], circuit[0]);
-		
-		return fitaux;
-	}
+	
 
 	@Override
 	public void mutate() {
