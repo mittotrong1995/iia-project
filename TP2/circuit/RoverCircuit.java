@@ -10,7 +10,7 @@ public class RoverCircuit extends Individual {
 	private static Individual[] children = new Individual[2];
 	
 	private int size;
-	private int[] circuit;
+	public int[] circuit;
 	private ObservationData data;
 	private Double fitness;
 	
@@ -68,7 +68,6 @@ public class RoverCircuit extends Individual {
 		time += data.getCost(previous, circuit[0]);
 		
 		fitness = (double) time;
-		System.out.println(fitness);
 		return fitness;
 	}
 	
@@ -76,7 +75,7 @@ public class RoverCircuit extends Individual {
 	public Individual[] crossover(Individual other) {
 		int r1 = gen.nextInt(size-1);
 		int r2 = gen.nextInt(size-2);
-		int cut1, cut2;
+		int cut1, cut2, j;
 		
 		
 		if( r2 >= r1 ){
@@ -89,32 +88,38 @@ public class RoverCircuit extends Individual {
 
 		int[] child1 = new int[size];
 		int[] child2 = new int[size];
+		for(int i=0;i<size;i++){
+			child1[i] = -1;
+			child2[i] = -1;
+		}
 		
 		int[] father = this.circuit;
 		int[] mother = ((RoverCircuit) other).circuit;
 		
-		for(int i=cut1; i < cut2;i++) {
+		for(int i=cut1; i <= cut2;i++) {
 			child1[i] = father[i]; 
 			child2[i] = mother[i];		
 		}
 		
 		// copies from mum to child1
+		j =0;
 		for(int i=0; i < size; i++) {
-			int j =0;
 			if( !contains(mother[i], child1)) {
-				child1[j++] = mother[i];
+				child1[j] = mother[i];
+				j++;
 				if( j==cut1)
-					j=cut2;
+					j=cut2+1;
 			}
 		}
-		
+		j=0;
 		// copies from dad to child2
 		for(int i=0; i < size; i++) {
-			int j =0;
+			
 			if( !contains(father[i], child2)) {
-				child2[j++] = father[i];
+				child2[j] = father[i];
+				j++;
 				if( j==cut1)
-					j=cut2;
+					j=cut2+1;
 			}
 		}
 		

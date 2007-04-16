@@ -90,7 +90,7 @@ public class Population {
 	
 	public Population getElite(){
 		Population p= new Population();
-		p.addIndividual((Individual) this.getBestIndividual().clone());
+		p.addIndividual(this.getBestIndividual());
 		return p;
 	}
 
