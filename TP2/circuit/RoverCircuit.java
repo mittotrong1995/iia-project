@@ -55,17 +55,14 @@ public class RoverCircuit extends Individual {
 	
 	@Override
 	public double fitness() {
-
 		if( fitness != null )
 			return fitness;
 		
 		int time = data.getSpot(circuit[0]).firstTime();
-		int previous = circuit[0];
-		for(int i=0; i < size; i++ ) {
-			time += data.getSpot(circuit[i]).durationObservation(time) + data.getCost(previous,circuit[i]);
-			previous = circuit[i];
+		for(int i=1; i < size; i++ ) {
+			time += data.getSpot(circuit[i]).durationObservation(time) + data.getCost(circuit[i-1],circuit[i]);
 		}
-		time += data.getCost(previous, circuit[0]);
+		time += data.getCost(circuit[size-1], circuit[0]);
 		
 		fitness = (double) time;
 		return fitness;
