@@ -73,5 +73,4 @@ public class GeneticAlgorithm {
 		}
 		return pop.getBestIndividual();
 	}
-	
 }
