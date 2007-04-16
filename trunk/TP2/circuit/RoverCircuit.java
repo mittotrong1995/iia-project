@@ -71,7 +71,7 @@ public class RoverCircuit extends Individual {
 	
 	@Override
 	public Individual[] crossover(Individual other) {
-		/*int r1 = gen.nextInt(size-1);
+		int r1 = gen.nextInt(size-1);
 		int r2 = gen.nextInt(size-2);
 		int cut1, cut2, j;
 		
@@ -86,9 +86,9 @@ public class RoverCircuit extends Individual {
 
 		int[] child1 = new int[size];
 		int[] child2 = new int[size];
-		int[] cuttedf = new int[cut2-cut1+1];
-		int[] cuttedm = new int[cut2-cut1+1];
+		
 		for(int i=0;i<size;i++){
+
 			child1[i] = -1;
 			child2[i] = -1;
 		}
@@ -99,8 +99,6 @@ public class RoverCircuit extends Individual {
 		for(int i=cut1; i <= cut2;i++) {
 			child1[i] = father[i]; 
 			child2[i] = mother[i];
-			cuttedf[i-cut1] = father[i];
-			cuttedm[i-cut1] = mother[i];
 		}
 			
 		
@@ -129,7 +127,9 @@ public class RoverCircuit extends Individual {
 		children[0] = new RoverCircuit(data, child1);
 		children[1] = new RoverCircuit(data, child2);
 		
-		return children;*/
+		return children;
+	}
+		/*
 		int r1 = gen.nextInt(size-1);
 		int r2 = gen.nextInt(size-2);
 		//int []cuts = new int[Math.abs(r1-r2)+1]; 
@@ -185,13 +185,15 @@ public class RoverCircuit extends Individual {
 		children[1] = new RoverCircuit(data,child2);
 		
 		return children;
-	}
+	}*/
 
 	
 
 	@Override
 	public void mutate() {
+
 		/*int swap1 = gen.nextInt(size);
+
 		int swap2 = gen.nextInt(size-1);
 		if( swap2 >= swap1 )
 			swap2++;
@@ -211,11 +213,9 @@ public class RoverCircuit extends Individual {
 			circuit[r1] = circuit[r2];
 			circuit[r2] = aux;
 		}
+
 		fitness = null;
-		
-		
 	}
-	
 	
 	public String toString() {
 		String out = "";

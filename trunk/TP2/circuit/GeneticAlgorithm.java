@@ -35,7 +35,7 @@ public class GeneticAlgorithm {
 	 * 	Método que pesquisa e devolve o melhor indivíduo encontrado
 	 * @return pop.getBestIndividual(), o melhor indivíduo
 	 */
-	public Individual search() {
+	/*public Individual search() {
 		/*Random rand = new Random();
 		double bestFit = pop.getBestFit();
 		double best = Double.POSITIVE_INFINITY;
@@ -66,7 +66,7 @@ public class GeneticAlgorithm {
 					if(rand.nextFloat() <= pmutate){
 						for(int j =0;j<100;j++){
 							auxchild.mutate();
-							double f =child[i].fitness(); 
+							double f = child[i].fitness(); 
 							if ( f < best){
 								best = f;
 								bestMutation = i;
@@ -81,6 +81,7 @@ public class GeneticAlgorithm {
 					else
 						newpop.addIndividual(child[i]);
 				}
+				
 				pop = newpop;
 				
 				if (pop.getBestFit() <= bestFit){
@@ -91,60 +92,68 @@ public class GeneticAlgorithm {
 					counter++;
 			}
 		}
-		return pop.getBestIndividual();*/
-		Random gen = new Random();
 
+		System.out.println("Individual:"+pop.getBestIndividual());
+
+		return pop.getBestIndividual();
+	}*/
+	
+public Individual search() {
+		Random gen = new Random();
+		double best = Double.POSITIVE_INFINITY;
+		int bestMutation = -1;
+		
 		double lastfitpop = pop.getBestFit();
 		int ctr=0;
 		
-		while( ctr < 30000 ) {
+		while( ctr < 10000 ) {
 
 			Population newpop = pop.getElite(1);
 			
 			while( newpop.size() < pop.size() ) {
 				Individual father = pop.selectIndividual();
 				Individual mother = pop.selectIndividual();
-				Individual[] offspring;
+				Individual[] child;
 				
 				if (gen.nextFloat() <= pcrossover ) {
-					offspring = father.crossover(mother);
+					child = father.crossover(mother);
 				} else {
-					offspring = new Individual[2];
-					offspring[0]=(Individual) father.clone();
-					offspring[1]=(Individual) mother.clone();
+					child = new Individual[2];
+					child[0]=(Individual) father.clone();
+					child[1]=(Individual) mother.clone();
 				}
 				
-				/*for ( Individual o : offspring ) {
+				for ( Individual o : child ) {
 					if (gen.nextFloat() <= pmutate ) {
 						o.mutate();
 					}
 					newpop.addIndividual( o );
-				}*/
+				}
+				/*
 				Individual auxchild;
-				double best = Double.POSITIVE_INFINITY;
-				int bestMutation = -1;
+			
 				
-				for(int i=0; i< offspring.length;i++){
-					auxchild = offspring[i];
+				for(int i=0; i< child.length;i++){
+					auxchild = child[i];
 					if(gen.nextFloat() <= pmutate){
 						for(int j =0;j<100;j++){
 							auxchild.mutate();
-							double f = offspring[i].fitness(); 
+							double f = child[i].fitness(); 
 							if ( f < best){
 								best = f;
 								bestMutation = i;
 							}
-							auxchild = offspring[i];
+							auxchild = child[i];
 						}
 						
 					}
 					if (bestMutation != -1){
-						newpop.addIndividual(offspring[bestMutation]);
+						newpop.addIndividual(child[bestMutation]);
 					}
 					else
-						newpop.addIndividual(offspring[i]);
+						newpop.addIndividual(child[i]);
+			}*/
 			}
-			
 			pop = newpop;
 			if( pop.getBestFit() < lastfitpop ) {
 				ctr=0;
@@ -155,8 +164,7 @@ public class GeneticAlgorithm {
 				ctr++;
 			}
 		}
-		}
+
 		return pop.getBestIndividual();
-		
 	}
 }
