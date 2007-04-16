@@ -1,6 +1,7 @@
 package circuit;
 
 import java.util.*;
+
 /**
  * 	Classe que instancia a classe abstracta Individual
  */
@@ -65,12 +66,12 @@ public class RoverCircuit extends Individual {
 		time += data.getCost(circuit[size-1], circuit[0]);
 		
 		fitness = (double) time;
-		return 0;
+		return fitness;
 	}
 	
 	@Override
 	public Individual[] crossover(Individual other) {
-		int r1 = gen.nextInt(size-1);
+		/*int r1 = gen.nextInt(size-1);
 		int r2 = gen.nextInt(size-2);
 		int cut1, cut2, j;
 		
@@ -85,6 +86,8 @@ public class RoverCircuit extends Individual {
 
 		int[] child1 = new int[size];
 		int[] child2 = new int[size];
+		int[] cuttedf = new int[cut2-cut1+1];
+		int[] cuttedm = new int[cut2-cut1+1];
 		for(int i=0;i<size;i++){
 			child1[i] = -1;
 			child2[i] = -1;
@@ -95,8 +98,11 @@ public class RoverCircuit extends Individual {
 		
 		for(int i=cut1; i <= cut2;i++) {
 			child1[i] = father[i]; 
-			child2[i] = mother[i];		
+			child2[i] = mother[i];
+			cuttedf[i-cut1] = father[i];
+			cuttedm[i-cut1] = mother[i];
 		}
+			
 		
 		// copies from mum to child1
 		j =0;
@@ -123,6 +129,61 @@ public class RoverCircuit extends Individual {
 		children[0] = new RoverCircuit(data, child1);
 		children[1] = new RoverCircuit(data, child2);
 		
+		return children;*/
+		int r1 = gen.nextInt(size-1);
+		int r2 = gen.nextInt(size-2);
+		//int []cuts = new int[Math.abs(r1-r2)+1]; 
+		
+		
+		// Obtains cutpoints
+		int cut1, cut2;
+		if( r2 >= r1 )  {
+			cut1 = r1+1;
+			cut2 = r2+1;
+			
+		} else {
+			cut1 = r2+1;
+			cut2 = r1+1;
+		}
+
+//		System.out.println(cut1+" "+cut2);
+		
+		boolean[] check1 = new boolean[size];
+		boolean[] check2 = new boolean[size];
+		int[] child1 = new int[size];
+		int[] child2 = new int[size];
+		int[] dad = this.circuit;
+		int[] mum = ((RoverCircuit) other).circuit;
+		
+		// copies the middle segments
+		for(int i=cut1; i<cut2;i++) {
+			child1[i] = dad[i];
+			check1[child1[i]] = true;
+			child2[i] = mum[i];
+			check2[child2[i]] = true;			
+		}
+		
+		// copies from mum to child1
+		for(int i=0,j=0; i < size; i++) {
+			if( !check1[mum[i]]) {
+				child1[j++] = mum[i];
+				if( j==cut1)
+					j=cut2;
+			}
+		}
+		
+		// copies from dad to child2
+		for(int i=0,j=0; i < size; i++) {
+			if( !check2[dad[i]]) {
+				child2[j++] = dad[i];
+				if( j==cut1)
+					j=cut2;
+			}
+		}
+		
+		children[0] = new RoverCircuit(data,child1);
+		children[1] = new RoverCircuit(data,child2);
+		
 		return children;
 	}
 
@@ -130,7 +191,7 @@ public class RoverCircuit extends Individual {
 
 	@Override
 	public void mutate() {
-	/*	int swap1 = gen.nextInt(size);
+		/*int swap1 = gen.nextInt(size);
 		int swap2 = gen.nextInt(size-1);
 		if( swap2 >= swap1 )
 			swap2++;
@@ -150,6 +211,8 @@ public class RoverCircuit extends Individual {
 			circuit[r1] = circuit[r2];
 			circuit[r2] = aux;
 		}
+		fitness = null;
+		
 		
 	}
 	

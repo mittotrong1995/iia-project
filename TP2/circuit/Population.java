@@ -87,6 +87,12 @@ public class Population {
 			bestInd = ind;
 		}
 	}
+	
+	public Population getElite(int n){
+		Population z = new Population();
+		z.addIndividual(this.bestInd);
+		return z;
+	}
 
 
 	public ArrayList<Double> getAcum() {
