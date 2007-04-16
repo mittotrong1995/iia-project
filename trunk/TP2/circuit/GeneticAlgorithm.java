@@ -37,6 +37,8 @@ public class GeneticAlgorithm {
 	public Individual search() {
 		Random rand = new Random();
 		double bestFit = pop.getBestFit();
+		double best = Double.POSITIVE_INFINITY;
+		int bestMutation = -1;
 		int counter = 0;
 		
 		while (counter < 30000){
@@ -56,11 +58,26 @@ public class GeneticAlgorithm {
 					child[1] = (Individual)mother.clone();
 				}
 				
+				Individual auxchild;
+				
 				for(int i=0; i< child.length;i++){
+					auxchild = child[i];
 					if(rand.nextFloat() <= pmutate){
-						child[i].mutate();
+						for(int j =0;j<100;j++){
+							auxchild.mutate();
+							double f =child[i].fitness(); 
+							if ( f < best){
+								best = f;
+								bestMutation = i;
+							}
+							auxchild = child[i];
+						}
+						
 					}
-					newpop.addIndividual(child[i]);
+					if (bestMutation != -1)
+						newpop.addIndividual(child[bestMutation]);
+					else
+						newpop.addIndividual(child[i]);
 				}
 				pop = newpop;
 				

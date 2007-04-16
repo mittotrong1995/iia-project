@@ -10,7 +10,7 @@ public class CircuitTest {
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 		String toObservation = "";
-		BufferedReader in = new BufferedReader( new FileReader("C:\\Documents and Settings\\Santanidis\\My Documents\\FCT\\10º Semestre\\IIA\\Trabalhos\\t2\\CincoLinha.txt"));
+		BufferedReader in = new BufferedReader( new FileReader("C:\\Documents and Settings\\Santanidis\\My Documents\\FCT\\10º Semestre\\IIA\\Trabalhos\\t2\\CinquentaAnel.txt"));
 		
 		String line = in.readLine();
 		while( line != null) {
@@ -28,12 +28,13 @@ public class CircuitTest {
 			p.addIndividual(ind);
 		}	
 		System.out.println(p.getBestIndividual());
+		System.out.println("Fit: "+ p.getBestIndividual().fitness());
 		
-		GeneticAlgorithm algorithm = new GeneticAlgorithm(p);
+		GeneticAlgorithm algorithm = new GeneticAlgorithm(p,0.9F,0.001F);
 		
-		System.out.println("Best individual found: "+algorithm.search());
-	        
-        
+		Individual indy = algorithm.search();
+		System.out.println("Best individual found: "+ indy);
+		System.out.println("Fit: "+ indy.fitness());
 	}
 
 }

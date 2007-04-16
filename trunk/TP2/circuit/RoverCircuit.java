@@ -130,14 +130,27 @@ public class RoverCircuit extends Individual {
 
 	@Override
 	public void mutate() {
-		int swap1 = gen.nextInt(size);
+	/*	int swap1 = gen.nextInt(size);
 		int swap2 = gen.nextInt(size-1);
 		if( swap2 >= swap1 )
 			swap2++;
 		int aux = circuit[swap1];
 		circuit[swap1] = circuit[swap2];
 		circuit[swap2] = aux;
-			fitness = null;
+			fitness = null;*/
+		
+		int num = gen.nextInt(size/20);
+		int r1,r2,aux;
+		
+		for(int i=0;i<num;i++){
+			r1 = gen.nextInt(size);
+			r2 = gen.nextInt(size);
+			
+			aux = circuit[r1];
+			circuit[r1] = circuit[r2];
+			circuit[r2] = aux;
+		}
+		
 	}
 	
 	
