@@ -66,7 +66,10 @@ public class Population {
 		if( pos >= 0)
 			return pop.get(pos);
 		else
-			return pop.get(-(pos+1));
+			if (-(pos+1) >= pop.size())
+				return pop.get(pop.size()-1);
+			else
+				return pop.get(-(pos+1));
 		
 	}
 	/**

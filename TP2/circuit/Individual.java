@@ -18,7 +18,7 @@ public abstract class Individual {
 	/**
 	 * 	Método abstracto que opera uma mutação num indivíduo.
 	 */
-	public abstract void mutate();
+	public abstract void mutate(int mut);
 	
 	@Override
 	public abstract Object clone();
