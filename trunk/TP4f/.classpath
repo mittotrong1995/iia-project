@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry path="" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" kind="con"/>
+	<classpathentry path="C:/Documents and Settings/Santanidis/My Documents/FCT/10º Semestre/IIA/Trabalhos/t4/joone-engine-2.0.0RC1/joone-engine.jar" kind="lib"/>
+	<classpathentry path="C:/Documents and Settings/Santanidis/My Documents/FCT/10º Semestre/IIA/Trabalhos/t4/RoverSim/navigator.jar" kind="lib"/>
+	<classpathentry path="" kind="output"/>
+</classpath>
